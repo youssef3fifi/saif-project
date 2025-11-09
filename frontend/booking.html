@@ -194,31 +194,18 @@
     <script src="js/main.js"></script>
     <script src="js/booking.js"></script>
     <script>
-        // Update price calculation display
-        function updatePriceDisplay() {
-            if (selectedTour) {
-                document.getElementById('price-per-person').textContent = formatPrice(selectedTour.price);
-                const travelers = parseInt(document.getElementById('travelers').value) || 1;
-                document.getElementById('num-travelers').textContent = travelers;
-                updateTotalPrice();
-            }
-        }
-
-        // Override the updateTotalPrice to also update display
-        const originalUpdateTotalPrice = window.updateTotalPrice;
-        window.updateTotalPrice = function() {
-            originalUpdateTotalPrice();
-            updatePriceDisplay();
-        };
-
-        // Listen for tour load to update price display
-        const observer = new MutationObserver(function(mutations) {
-            if (selectedTour) {
-                updatePriceDisplay();
-                observer.disconnect();
-            }
+        // Update price calculation display when tour is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for selectedTour to be loaded
+            const checkTour = setInterval(function() {
+                if (selectedTour) {
+                    clearInterval(checkTour);
+                    document.getElementById('price-per-person').textContent = formatPrice(selectedTour.price);
+                    const travelers = parseInt(document.getElementById('travelers').value) || 1;
+                    document.getElementById('num-travelers').textContent = travelers;
+                }
+            }, 100);
         });
-        observer.observe(document.getElementById('tour-summary'), { childList: true });
     </script>
 </body>
 </html>
