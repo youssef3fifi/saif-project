@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all available tours and destinations">
+    <title>All Tours - Wanderlust Travel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-globe-americas"></i>
+                Wanderlust Travel
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tours.html" class="active">Tours</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="about.html#contact">Contact</a></li>
+                <li><a href="tours.html" class="btn btn-primary">Book Now</a></li>
+            </ul>
+            <button id="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="hero" style="padding: 3rem 0;">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explore Our Tours</h1>
+                <p>Find your perfect adventure from our curated selection</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section style="padding-top: 2rem;">
+        <div class="container-wide">
+            <div class="filters-section">
+                <div class="container-wide">
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label for="search-tours">
+                                <i class="fas fa-search"></i> Search
+                            </label>
+                            <input 
+                                type="text" 
+                                id="search-tours" 
+                                placeholder="Search by name, location..."
+                            >
+                        </div>
+                        <div class="filter-group">
+                            <label for="price-filter">
+                                <i class="fas fa-dollar-sign"></i> Price Range
+                            </label>
+                            <select id="price-filter">
+                                <option value="all">All Prices</option>
+                                <option value="0-1500">Under $1,500</option>
+                                <option value="1500-2000">$1,500 - $2,000</option>
+                                <option value="2000-2500">$2,000 - $2,500</option>
+                                <option value="2500-99999">$2,500+</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="sort-filter">
+                                <i class="fas fa-sort"></i> Sort By
+                            </label>
+                            <select id="sort-filter">
+                                <option value="default">Featured</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="name">Name (A-Z)</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" style="display: flex; align-items: flex-end;">
+                            <button onclick="resetFilters()" class="btn btn-outline" style="width: 100%;">
+                                <i class="fas fa-redo"></i> Reset Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count" id="results-count">Loading...</div>
+            </div>
+
+            <!-- Tours Grid -->
+            <div class="tours-grid" id="tours-container">
+                <!-- Tours will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Wanderlust</h3>
+                    <p>We are passionate about creating unforgettable travel experiences. Discover the world with confidence.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Destinations</h3>
+                    <ul>
+                        <li><a href="tours.html">Egypt</a></li>
+                        <li><a href="tours.html">Greece</a></li>
+                        <li><a href="tours.html">Japan</a></li>
+                        <li><a href="tours.html">France</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@wanderlust.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel St, NY 10001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wanderlust Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/tours.js"></script>
+    <script>
+        // Check for search parameter in URL
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('search');
+            if (searchTerm) {
+                document.getElementById('search-tours').value = searchTerm;
+            }
+        });
+    </script>
+</body>
+</html>

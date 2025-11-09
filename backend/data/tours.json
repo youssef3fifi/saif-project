@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Egyptian Pyramids Adventure",
+    "location": "Cairo, Egypt",
+    "duration": "5 days",
+    "price": 1200,
+    "image": "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800",
+    "description": "Explore the ancient wonders of Egypt including the Great Pyramids of Giza, the Sphinx, and the Egyptian Museum. Includes guided tours, accommodation, and traditional Egyptian cuisine.",
+    "highlights": [
+      "Great Pyramids of Giza",
+      "Egyptian Museum",
+      "Nile River Cruise",
+      "Traditional Egyptian Dinner"
+    ],
+    "included": ["Hotel Accommodation", "Guided Tours", "Breakfast & Lunch", "Transportation"],
+    "maxGroupSize": 15,
+    "difficulty": "Easy",
+    "rating": 4.8,
+    "reviews": 234
+  },
+  {
+    "id": 2,
+    "name": "Santorini Greek Islands",
+    "location": "Santorini, Greece",
+    "duration": "7 days",
+    "price": 2100,
+    "image": "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800",
+    "description": "Experience the stunning beauty of Santorini with its white-washed buildings, blue-domed churches, and breathtaking sunsets. Enjoy wine tasting, beach relaxation, and island hopping.",
+    "highlights": [
+      "Oia Sunset Views",
+      "Wine Tasting Tour",
+      "Red Beach Visit",
+      "Volcano Island Excursion"
+    ],
+    "included": ["Luxury Hotel", "Island Tours", "Wine Tasting", "All Meals", "Airport Transfer"],
+    "maxGroupSize": 12,
+    "difficulty": "Easy",
+    "rating": 4.9,
+    "reviews": 456
+  },
+  {
+    "id": 3,
+    "name": "Tokyo Cultural Experience",
+    "location": "Tokyo, Japan",
+    "duration": "6 days",
+    "price": 2500,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+    "description": "Immerse yourself in Japanese culture with visits to ancient temples, bustling markets, and modern attractions. Experience traditional tea ceremonies and authentic Japanese cuisine.",
+    "highlights": [
+      "Senso-ji Temple",
+      "Tokyo Skytree",
+      "Tea Ceremony",
+      "Tsukiji Fish Market"
+    ],
+    "included": ["4-Star Hotel", "Guided Tours", "Cultural Activities", "Daily Breakfast", "JR Pass"],
+    "maxGroupSize": 10,
+    "difficulty": "Moderate",
+    "rating": 4.7,
+    "reviews": 189
+  },
+  {
+    "id": 4,
+    "name": "Paris Romantic Getaway",
+    "location": "Paris, France",
+    "duration": "4 days",
+    "price": 1800,
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
+    "description": "Fall in love with the City of Light. Visit iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame. Enjoy French cuisine and Seine River cruises.",
+    "highlights": [
+      "Eiffel Tower",
+      "Louvre Museum",
+      "Seine River Cruise",
+      "Versailles Palace"
+    ],
+    "included": ["Boutique Hotel", "Museum Tickets", "Seine Cruise", "Breakfast", "Metro Pass"],
+    "maxGroupSize": 8,
+    "difficulty": "Easy",
+    "rating": 4.9,
+    "reviews": 567
+  },
+  {
+    "id": 5,
+    "name": "Dubai Luxury Tour",
+    "location": "Dubai, UAE",
+    "duration": "5 days",
+    "price": 2800,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800",
+    "description": "Experience luxury in Dubai with visits to the Burj Khalifa, desert safaris, and world-class shopping. Stay in 5-star hotels and enjoy gourmet dining.",
+    "highlights": [
+      "Burj Khalifa",
+      "Desert Safari",
+      "Dubai Mall",
+      "Palm Jumeirah"
+    ],
+    "included": ["5-Star Hotel", "All Tours", "Desert Safari", "All Meals", "Luxury Transportation"],
+    "maxGroupSize": 6,
+    "difficulty": "Easy",
+    "rating": 4.8,
+    "reviews": 392
+  },
+  {
+    "id": 6,
+    "name": "Bali Tropical Paradise",
+    "location": "Bali, Indonesia",
+    "duration": "8 days",
+    "price": 1600,
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
+    "description": "Discover the magic of Bali with pristine beaches, ancient temples, and lush rice terraces. Experience traditional Balinese culture and world-class surfing.",
+    "highlights": [
+      "Uluwatu Temple",
+      "Tegallalang Rice Terraces",
+      "Beach Hopping",
+      "Traditional Dance Show"
+    ],
+    "included": ["Beach Resort", "Cultural Tours", "Spa Treatment", "Daily Breakfast", "Airport Transfer"],
+    "maxGroupSize": 14,
+    "difficulty": "Easy",
+    "rating": 4.6,
+    "reviews": 278
+  },
+  {
+    "id": 7,
+    "name": "Swiss Alps Adventure",
+    "location": "Interlaken, Switzerland",
+    "duration": "6 days",
+    "price": 3200,
+    "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800",
+    "description": "Adventure in the Swiss Alps with skiing, hiking, and breathtaking mountain views. Visit charming alpine villages and experience Swiss hospitality.",
+    "highlights": [
+      "Jungfraujoch",
+      "Skiing/Snowboarding",
+      "Mountain Hiking",
+      "Swiss Chocolate Tour"
+    ],
+    "included": ["Mountain Hotel", "Ski Pass", "All Activities", "Meals", "Mountain Transport"],
+    "maxGroupSize": 10,
+    "difficulty": "Moderate",
+    "rating": 4.9,
+    "reviews": 445
+  },
+  {
+    "id": 8,
+    "name": "Amazon Rainforest Expedition",
+    "location": "Manaus, Brazil",
+    "duration": "7 days",
+    "price": 2200,
+    "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800",
+    "description": "Explore the world's largest rainforest with guided jungle treks, wildlife spotting, and indigenous community visits. A true adventure for nature lovers.",
+    "highlights": [
+      "Jungle Trekking",
+      "Wildlife Spotting",
+      "Amazon River Cruise",
+      "Indigenous Village Visit"
+    ],
+    "included": ["Eco-Lodge", "All Excursions", "Expert Guide", "All Meals", "River Transport"],
+    "maxGroupSize": 8,
+    "difficulty": "Challenging",
+    "rating": 4.7,
+    "reviews": 156
+  },
+  {
+    "id": 9,
+    "name": "New York City Explorer",
+    "location": "New York, USA",
+    "duration": "5 days",
+    "price": 1900,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800",
+    "description": "Experience the city that never sleeps. Visit iconic landmarks, world-class museums, Broadway shows, and diverse neighborhoods that make NYC unique.",
+    "highlights": [
+      "Statue of Liberty",
+      "Times Square",
+      "Central Park",
+      "Broadway Show"
+    ],
+    "included": ["Manhattan Hotel", "Attraction Tickets", "Broadway Show", "Subway Pass", "Food Tour"],
+    "maxGroupSize": 15,
+    "difficulty": "Easy",
+    "rating": 4.8,
+    "reviews": 523
+  },
+  {
+    "id": 10,
+    "name": "Morocco Desert Adventure",
+    "location": "Marrakech, Morocco",
+    "duration": "6 days",
+    "price": 1400,
+    "image": "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=800",
+    "description": "Journey through Morocco's imperial cities and Sahara Desert. Experience vibrant souks, ancient medinas, and overnight camping under desert stars.",
+    "highlights": [
+      "Sahara Desert Camp",
+      "Marrakech Medina",
+      "Camel Trekking",
+      "Atlas Mountains"
+    ],
+    "included": ["Riad Accommodation", "Desert Camp", "Camel Trek", "All Meals", "4x4 Transport"],
+    "maxGroupSize": 12,
+    "difficulty": "Moderate",
+    "rating": 4.8,
+    "reviews": 312
+  }
+]
