@@ -12,6 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+// CORS: Allow all origins for development and AWS deployment flexibility
+// For production, set CORS_ORIGIN in .env to specific domain(s)
 app.use(cors({
   origin: process.env.CORS_ORIGIN || '*',
   credentials: true

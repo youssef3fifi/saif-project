@@ -10,7 +10,8 @@ const validateBooking = (req, res, next) => {
     errors.push('Name must be at least 2 characters long');
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // Simple email validation to avoid ReDoS attacks
+  if (!email || !email.includes('@') || !email.includes('.') || email.length < 5 || email.length > 254) {
     errors.push('Valid email is required');
   }
 
@@ -48,7 +49,8 @@ const validateContact = (req, res, next) => {
     errors.push('Name must be at least 2 characters long');
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // Simple email validation to avoid ReDoS attacks
+  if (!email || !email.includes('@') || !email.includes('.') || email.length < 5 || email.length > 254) {
     errors.push('Valid email is required');
   }
 
