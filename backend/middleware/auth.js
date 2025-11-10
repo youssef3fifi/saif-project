@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const { findOne } = require('../utils/fileDB');
 
 // Protect routes - verify JWT token
 exports.protect = async (req, res, next) => {
@@ -18,7 +18,16 @@ exports.protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.id);
+    const user = await findOne('users.json', { id: decoded.id });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Not authorized to access this route',
+      });
+    }
+    // Remove password from user object
+    const { password, ...userWithoutPassword } = user;
+    req.user = userWithoutPassword;
     next();
   } catch (error) {
     return res.status(401).json({

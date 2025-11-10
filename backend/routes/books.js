@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const Book = require('../models/Book');
+const { findOne, findAll, create, update, deleteOne, search } = require('../utils/fileDB');
 const { protect, authorize } = require('../middleware/auth');
 
 // @route   GET /api/books
@@ -9,22 +9,22 @@ const { protect, authorize } = require('../middleware/auth');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const { search, category } = req.query;
-    let query = {};
+    const { search: searchTerm, category } = req.query;
+    let books;
 
-    if (search) {
-      query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { author: { $regex: search, $options: 'i' } },
-        { isbn: { $regex: search, $options: 'i' } },
-      ];
+    if (searchTerm) {
+      books = await search('books.json', ['title', 'author', 'isbn'], searchTerm);
+    } else {
+      books = await findAll('books.json');
     }
 
     if (category) {
-      query.category = category;
+      books = books.filter(book => book.category === category);
     }
 
-    const books = await Book.find(query).sort({ createdAt: -1 });
+    // Sort by createdAt descending
+    books.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
     res.json({
       success: true,
       count: books.length,
@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/:id', async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const book = await findOne('books.json', { id: parseInt(req.params.id) });
 
     if (!book) {
       return res.status(404).json({
@@ -91,18 +91,27 @@ router.post(
     }
 
     try {
-      const book = await Book.create(req.body);
-      res.status(201).json({
-        success: true,
-        data: book,
-      });
-    } catch (error) {
-      if (error.code === 11000) {
+      // Check if ISBN already exists
+      const existingBook = await findOne('books.json', { isbn: req.body.isbn });
+      if (existingBook) {
         return res.status(400).json({
           success: false,
           message: 'Book with this ISBN already exists',
         });
       }
+
+      // Set available to quantity if not provided
+      const bookData = {
+        ...req.body,
+        available: req.body.available !== undefined ? req.body.available : req.body.quantity
+      };
+
+      const book = await create('books.json', bookData);
+      res.status(201).json({
+        success: true,
+        data: book,
+      });
+    } catch (error) {
       res.status(500).json({
         success: false,
         message: 'Server error',
@@ -117,10 +126,7 @@ router.post(
 // @access  Private/Admin
 router.put('/:id', protect, authorize('admin'), async (req, res) => {
   try {
-    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const book = await update('books.json', req.params.id, req.body);
 
     if (!book) {
       return res.status(404).json({
@@ -147,7 +153,7 @@ router.put('/:id', protect, authorize('admin'), async (req, res) => {
 // @access  Private/Admin
 router.delete('/:id', protect, authorize('admin'), async (req, res) => {
   try {
-    const book = await Book.findByIdAndDelete(req.params.id);
+    const book = await deleteOne('books.json', req.params.id);
 
     if (!book) {
       return res.status(404).json({

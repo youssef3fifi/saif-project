@@ -1,6 +1,6 @@
 # Library Management System - Backend
 
-RESTful API backend for the Library Management System built with Node.js, Express, and MongoDB.
+RESTful API backend for the Library Management System built with Node.js, Express, and JSON file storage.
 
 ## Features
 
@@ -9,15 +9,17 @@ RESTful API backend for the Library Management System built with Node.js, Expres
 - Complete CRUD operations for books
 - Borrowing and returning system
 - Transaction tracking
-- MongoDB integration with Mongoose ODM
+- JSON file-based storage (no database required!)
 - Input validation
 - CORS configuration for AWS EC2 deployment
+- Automatic data initialization with sample data
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (local installation or MongoDB Atlas account)
 - npm or yarn
+
+**No database installation required!** Data is stored in JSON files.
 
 ## Installation
 
@@ -32,9 +34,20 @@ cp .env.example .env
 ```
 
 3. Update the `.env` file with your configuration:
-   - Set your MongoDB connection string
    - Set a secure JWT secret
    - Configure FRONTEND_URL for CORS
+
+## Data Storage
+
+The application uses JSON files for data persistence:
+- `data/users.json` - User accounts and authentication
+- `data/books.json` - Book catalog
+- `data/transactions.json` - Borrowing history
+
+On first run, the server automatically creates these files with sample data including:
+- Admin user (admin@library.com / admin123)
+- Regular user (user@library.com / user123)
+- Sample books (The Great Gatsby, To Kill a Mockingbird, 1984)
 
 ## Running the Server
 
@@ -107,7 +120,7 @@ npm install
 nano .env
 ```
 Update with production values, especially:
-- MongoDB Atlas connection string
+- JWT_SECRET with a strong secret key
 - FRONTEND_URL with your EC2 public IP
 
 ### 6. Start with PM2
@@ -124,28 +137,34 @@ pm2 logs library-api
 pm2 restart library-api
 ```
 
-## MongoDB Atlas Setup
+## Default Credentials
 
-1. Create a free account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Create a new cluster
-3. Add your EC2 IP to the IP Whitelist (or use 0.0.0.0/0 for testing)
-4. Create a database user
-5. Get your connection string and update `.env`
+After installation, you can log in with these default accounts:
+
+**Admin Account:**
+- Email: admin@library.com
+- Password: admin123
+
+**Regular User Account:**
+- Email: user@library.com
+- Password: user123
 
 ## Security Notes
 
 - Always use strong JWT secrets in production
 - Never commit `.env` file to version control
+- Never commit actual data files (`data/*.json`) to version control
 - Use HTTPS in production
 - Regularly update dependencies
 - Implement rate limiting for production
+- Change default passwords after first login
 
 ## Troubleshooting
 
-### MongoDB Connection Issues
-- Check your connection string format
-- Verify IP whitelist in MongoDB Atlas
-- Ensure network connectivity
+### Data Persistence
+- Data is stored in `backend/data/*.json` files
+- Backup these files regularly to preserve data
+- Files are automatically created on first run with sample data
 
 ### CORS Issues
 - Verify FRONTEND_URL in `.env` matches your frontend URL

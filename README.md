@@ -4,16 +4,17 @@ A complete full-stack library management system with Node.js backend and vanilla
 
 ## Features
 
-### Backend (Node.js + Express + MongoDB)
+### Backend (Node.js + Express + JSON File Storage)
 - RESTful API architecture
 - JWT-based authentication
 - Role-based access control (Admin/User)
-- MongoDB integration with Mongoose ODM
+- JSON file-based storage (no database required!)
 - Complete CRUD operations for books, users, and transactions
 - Borrowing and returning system
 - CORS configuration for AWS EC2 deployment
 - Input validation and error handling
 - Security best practices (bcrypt password hashing, JWT tokens)
+- Automatic data initialization with sample data
 
 ### Frontend (HTML + CSS + JavaScript)
 - **5 Professional Pages:**
@@ -32,8 +33,9 @@ A complete full-stack library management system with Node.js backend and vanilla
 
 ### Prerequisites
 - Node.js (v14 or higher)
-- MongoDB (local or MongoDB Atlas)
 - Git
+
+**No database installation required!** Data is stored in JSON files.
 
 ### Installation
 
@@ -52,7 +54,7 @@ npm run install-backend
 ```bash
 cd backend
 cp .env.example .env
-# Edit .env with your configuration
+# Edit .env with your JWT_SECRET and FRONTEND_URL
 ```
 
 4. **Start the backend server:**
@@ -78,12 +80,15 @@ npm run dev
 ```
 saif-project/
 ├── backend/
-│   ├── config/
-│   │   └── db.js                 # MongoDB connection
-│   ├── models/
-│   │   ├── User.js               # User model
-│   │   ├── Book.js               # Book model
-│   │   └── Transaction.js        # Transaction model
+│   ├── data/
+│   │   ├── users.json            # User data (auto-created)
+│   │   ├── books.json            # Book data (auto-created)
+│   │   ├── transactions.json     # Transaction data (auto-created)
+│   │   ├── users.example.json    # Example user data
+│   │   ├── books.example.json    # Example book data
+│   │   └── transactions.example.json  # Example transaction data
+│   ├── utils/
+│   │   └── fileDB.js             # JSON file database operations
 │   ├── routes/
 │   │   ├── auth.js               # Authentication routes
 │   │   ├── books.js              # Book routes
@@ -148,7 +153,6 @@ saif-project/
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/library-management
 JWT_SECRET=your_jwt_secret_key
 FRONTEND_URL=http://localhost:8000
 ```
@@ -158,6 +162,20 @@ The frontend automatically detects the environment. For custom configuration, ad
 ```html
 <meta name="api-url" content="http://YOUR_EC2_PUBLIC_IP:5000">
 ```
+
+## Default Credentials
+
+The system comes with pre-configured accounts for immediate use:
+
+**Admin Account:**
+- Email: admin@library.com
+- Password: admin123
+- Can manage books, view all users, and access all transactions
+
+**Regular User Account:**
+- Email: user@library.com
+- Password: user123
+- Can browse books, borrow/return books, and view personal profile
 
 ## User Roles
 
@@ -173,15 +191,6 @@ The frontend automatically detects the environment. For custom configuration, ad
 - View all users
 - View all transactions
 
-### Creating an Admin User
-Register a regular user, then update in MongoDB:
-```javascript
-db.users.updateOne(
-  { email: "admin@example.com" },
-  { $set: { role: "admin" } }
-)
-```
-
 ## AWS EC2 Deployment
 
 For detailed AWS deployment instructions, see [AWS_DEPLOYMENT_GUIDE.md](./AWS_DEPLOYMENT_GUIDE.md)
@@ -195,13 +204,13 @@ For detailed AWS deployment instructions, see [AWS_DEPLOYMENT_GUIDE.md](./AWS_DE
    - Port 80 (Frontend HTTP)
    - Port 443 (Frontend HTTPS - optional)
 
-3. **Install Node.js and MongoDB** (or use MongoDB Atlas)
+3. **Install Node.js**
 4. **Deploy Backend:**
    ```bash
    git clone <repo-url>
    cd saif-project/backend
    npm install
-   # Configure .env with MongoDB Atlas URI
+   # Configure .env with JWT_SECRET and FRONTEND_URL
    pm2 start server.js --name library-api
    ```
 
@@ -219,7 +228,7 @@ For detailed AWS deployment instructions, see [AWS_DEPLOYMENT_GUIDE.md](./AWS_DE
 ### Backend
 - Node.js
 - Express.js
-- MongoDB + Mongoose
+- JSON File Storage (fs.promises)
 - JWT (jsonwebtoken)
 - bcryptjs
 - express-validator
@@ -242,7 +251,7 @@ For detailed AWS deployment instructions, see [AWS_DEPLOYMENT_GUIDE.md](./AWS_DE
 - Input validation
 - CORS configuration
 - Environment variable management
-- SQL injection prevention (Mongoose)
+- Input sanitization and validation
 
 ## Development
 
@@ -272,10 +281,11 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 ### Backend Issues
 
-**MongoDB Connection Failed:**
-- Check MongoDB is running: `sudo systemctl status mongod`
-- Verify MONGODB_URI in .env
-- For Atlas: Check IP whitelist
+**Data Persistence:**
+- Data is stored in `backend/data/*.json` files
+- Files are automatically created on first run with sample data
+- Backup these files regularly to preserve your data
+- To reset data, delete the JSON files and restart the server
 
 **Port Already in Use:**
 ```bash

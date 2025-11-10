@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const { findOne, findAll } = require('../utils/fileDB');
 const { protect, authorize } = require('../middleware/auth');
 
 // @route   GET /api/users
@@ -8,11 +8,33 @@ const { protect, authorize } = require('../middleware/auth');
 // @access  Private/Admin
 router.get('/', protect, authorize('admin'), async (req, res) => {
   try {
-    const users = await User.find().populate('borrowedBooks.book').sort({ createdAt: -1 });
+    const users = await findAll('users.json');
+    const books = await findAll('books.json');
+    
+    // Populate borrowed books and remove passwords
+    const usersWithBooks = users.map(user => {
+      const borrowedBooksPopulated = user.borrowedBooks.map(bb => {
+        const book = books.find(b => b.id === bb.book);
+        return {
+          ...bb,
+          book: book || null
+        };
+      });
+      
+      const { password, ...userWithoutPassword } = user;
+      return {
+        ...userWithoutPassword,
+        borrowedBooks: borrowedBooksPopulated
+      };
+    });
+    
+    // Sort by createdAt descending
+    usersWithBooks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
     res.json({
       success: true,
-      count: users.length,
-      data: users,
+      count: usersWithBooks.length,
+      data: usersWithBooks,
     });
   } catch (error) {
     res.status(500).json({
@@ -28,7 +50,7 @@ router.get('/', protect, authorize('admin'), async (req, res) => {
 // @access  Private/Admin
 router.get('/:id', protect, authorize('admin'), async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate('borrowedBooks.book');
+    const user = await findOne('users.json', { id: parseInt(req.params.id) });
 
     if (!user) {
       return res.status(404).json({
@@ -37,9 +59,23 @@ router.get('/:id', protect, authorize('admin'), async (req, res) => {
       });
     }
 
+    // Populate borrowed books
+    const books = await findAll('books.json');
+    const borrowedBooksPopulated = user.borrowedBooks.map(bb => {
+      const book = books.find(b => b.id === bb.book);
+      return {
+        ...bb,
+        book: book || null
+      };
+    });
+    
+    const { password, ...userWithoutPassword } = user;
     res.json({
       success: true,
-      data: user,
+      data: {
+        ...userWithoutPassword,
+        borrowedBooks: borrowedBooksPopulated
+      },
     });
   } catch (error) {
     res.status(500).json({
