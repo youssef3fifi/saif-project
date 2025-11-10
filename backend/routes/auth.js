@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User');
+const { findOne, create, findAll } = require('../utils/fileDB');
 const { protect } = require('../middleware/auth');
 
 // Generate JWT token
@@ -35,7 +36,7 @@ router.post(
       const { name, email, password, role } = req.body;
 
       // Check if user already exists
-      const userExists = await User.findOne({ email });
+      const userExists = await findOne('users.json', { email });
       if (userExists) {
         return res.status(400).json({
           success: false,
@@ -43,22 +44,27 @@ router.post(
         });
       }
 
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       // Create user
-      const user = await User.create({
+      const user = await create('users.json', {
         name,
         email,
-        password,
+        password: hashedPassword,
         role: role || 'user',
+        borrowedBooks: []
       });
 
       res.status(201).json({
         success: true,
         data: {
-          _id: user._id,
+          _id: user.id,
+          id: user.id,
           name: user.name,
           email: user.email,
           role: user.role,
-          token: generateToken(user._id),
+          token: generateToken(user.id),
         },
       });
     } catch (error) {
@@ -93,7 +99,7 @@ router.post(
       const { email, password } = req.body;
 
       // Check if user exists
-      const user = await User.findOne({ email }).select('+password');
+      const user = await findOne('users.json', { email });
       if (!user) {
         return res.status(401).json({
           success: false,
@@ -102,7 +108,7 @@ router.post(
       }
 
       // Check password
-      const isMatch = await user.matchPassword(password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res.status(401).json({
           success: false,
@@ -113,11 +119,12 @@ router.post(
       res.json({
         success: true,
         data: {
-          _id: user._id,
+          _id: user.id,
+          id: user.id,
           name: user.name,
           email: user.email,
           role: user.role,
-          token: generateToken(user._id),
+          token: generateToken(user.id),
         },
       });
     } catch (error) {
@@ -135,10 +142,31 @@ router.post(
 // @access  Private
 router.get('/profile', protect, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate('borrowedBooks.book');
+    const user = await findOne('users.json', { id: req.user.id });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
+    
+    // Populate borrowed books
+    const books = await findAll('books.json');
+    const borrowedBooksPopulated = user.borrowedBooks.map(bb => {
+      const book = books.find(b => b.id === bb.book);
+      return {
+        ...bb,
+        book: book || null
+      };
+    });
+    
+    const { password, ...userWithoutPassword } = user;
     res.json({
       success: true,
-      data: user,
+      data: {
+        ...userWithoutPassword,
+        borrowedBooks: borrowedBooksPopulated
+      },
     });
   } catch (error) {
     res.status(500).json({

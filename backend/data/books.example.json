@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "isbn": "9780743273565",
+    "category": "Fiction",
+    "quantity": 5,
+    "available": 5,
+    "description": "A classic American novel",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "isbn": "9780061120084",
+    "category": "Fiction",
+    "quantity": 3,
+    "available": 3,
+    "description": "A gripping tale of racial injustice",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "1984",
+    "author": "George Orwell",
+    "isbn": "9780451524935",
+    "category": "Science Fiction",
+    "quantity": 4,
+    "available": 4,
+    "description": "Dystopian social science fiction",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

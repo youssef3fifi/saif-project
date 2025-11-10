@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Admin User",
+    "email": "admin@library.com",
+    "password": "$2a$10$hashed_password_will_be_generated_automatically",
+    "role": "admin",
+    "borrowedBooks": [],
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Regular User",
+    "email": "user@library.com",
+    "password": "$2a$10$hashed_password_will_be_generated_automatically",
+    "role": "user",
+    "borrowedBooks": [],
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

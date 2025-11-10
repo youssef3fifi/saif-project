@@ -2,13 +2,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
-const connectDB = require('./config/db');
+const { initializeData } = require('./utils/fileDB');
 
 // Load environment variables
 dotenv.config();
 
-// Connect to database
-connectDB();
+// Initialize JSON file storage
+initializeData().then(() => {
+  console.log('JSON file storage initialized');
+}).catch(err => {
+  console.error('Failed to initialize data:', err.message);
+  process.exit(1);
+});
 
 const app = express();
 
