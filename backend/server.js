@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 
 // Load environment variables
@@ -11,11 +12,34 @@ connectDB();
 
 const app = express();
 
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Apply rate limiting to all requests
+app.use(limiter);
+
+// Stricter rate limiting for auth routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 requests per windowMs
+  message: 'Too many authentication attempts, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration for AWS EC2 deployment
+// Note: In production, replace '*' with specific domain for better security
+// Set FRONTEND_URL in .env to restrict CORS to specific origin
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
   credentials: true,
@@ -24,7 +48,7 @@ app.use(cors({
 }));
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/transactions', require('./routes/transactions'));
