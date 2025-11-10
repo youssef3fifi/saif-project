@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover amazing travel destinations and book your dream vacation">
+    <title>Wanderlust Travel - Explore the World</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-globe-americas"></i>
+                Wanderlust Travel
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tours.html">Tours</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="about.html#contact">Contact</a></li>
+                <li><a href="tours.html" class="btn btn-primary">Book Now</a></li>
+            </ul>
+            <button id="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover Your Next Adventure</h1>
+                <p>Explore breathtaking destinations around the world with our curated travel experiences</p>
+                <div class="search-box">
+                    <input type="text" id="hero-search" placeholder="Where do you want to go?">
+                    <button onclick="searchTours()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tours -->
+    <section id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Destinations</h2>
+                <p>Handpicked tours from around the globe</p>
+            </div>
+            <div class="tours-grid" id="featured-tours">
+                <!-- Featured tours will be loaded here -->
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="tours.html" class="btn btn-primary">View All Tours</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>We make your travel dreams come true</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Best Destinations</h3>
+                    <p>Carefully curated destinations around the world with unique experiences</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Best Prices</h3>
+                    <p>Competitive pricing with no hidden fees, guaranteed best value</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support for all your travel needs</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your safety is our priority with secure booking and payments</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Travelers Say</h2>
+                <p>Real experiences from real travelers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">SM</div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Paris, France Trip</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Absolutely amazing experience! The tour was well-organized, and our guide was knowledgeable and friendly. Paris was magical!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-info">
+                            <h4>John Davis</h4>
+                            <p>Tokyo, Japan Tour</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The cultural experience in Tokyo exceeded all expectations. Every detail was perfect, from accommodation to activities."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">EW</div>
+                        <div class="testimonial-info">
+                            <h4>Emily Wilson</h4>
+                            <p>Bali Adventure</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Bali was a dream come true! The beaches, temples, and people were incredible. Highly recommend this tour company!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Wanderlust</h3>
+                    <p>We are passionate about creating unforgettable travel experiences. Discover the world with confidence.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Destinations</h3>
+                    <ul>
+                        <li><a href="tours.html">Egypt</a></li>
+                        <li><a href="tours.html">Greece</a></li>
+                        <li><a href="tours.html">Japan</a></li>
+                        <li><a href="tours.html">France</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@wanderlust.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel St, NY 10001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wanderlust Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Load featured tours
+        async function loadFeaturedTours() {
+            showLoading('featured-tours');
+            try {
+                const response = await fetchAPI(API_CONFIG.TOURS_URL);
+                const featuredTours = response.data.slice(0, 6);
+                displayFeaturedTours(featuredTours);
+            } catch (error) {
+                showError('featured-tours', 'Failed to load tours. Please try again later.');
+                console.error('Error loading featured tours:', error);
+            }
+        }
+
+        function displayFeaturedTours(tours) {
+            const container = document.getElementById('featured-tours');
+            container.innerHTML = tours.map(tour => `
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="${tour.image}" alt="${tour.name}" loading="lazy">
+                        <div class="tour-badge">${tour.duration}</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-header">
+                            <h3>${tour.name}</h3>
+                            <div class="tour-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${tour.rating}</span>
+                                <span class="reviews">(${tour.reviews} reviews)</span>
+                            </div>
+                        </div>
+                        <div class="tour-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${tour.location}</span>
+                        </div>
+                        <p class="tour-description">${tour.description.substring(0, 100)}...</p>
+                        <div class="tour-footer">
+                            <div class="tour-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">${formatPrice(tour.price)}</span>
+                            </div>
+                            <a href="booking.html?tourId=${tour.id}" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function searchTours() {
+            const searchTerm = document.getElementById('hero-search').value;
+            if (searchTerm) {
+                window.location.href = `tours.html?search=${encodeURIComponent(searchTerm)}`;
+            } else {
+                window.location.href = 'tours.html';
+            }
+        }
+
+        // Allow Enter key to search
+        document.getElementById('hero-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchTours();
+            }
+        });
+
+        // Load featured tours on page load
+        document.addEventListener('DOMContentLoaded', loadFeaturedTours);
+    </script>
+</body>
+</html>

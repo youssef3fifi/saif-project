@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "+1234567890",
+    "tourId": 1,
+    "tourName": "Egyptian Pyramids Adventure",
+    "date": "2025-12-25",
+    "travelers": 2,
+    "totalPrice": 2400,
+    "specialRequests": "",
+    "status": "pending",
+    "createdAt": "2025-11-09T23:52:01.655Z"
+  }
+]
